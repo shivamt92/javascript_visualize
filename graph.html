@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+  <title>SIR Modelling</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css" >
+  <script src="./network_graph.js"></script>
+  <!-- <script src="./SIR.js"></script> -->
+</head>
+<body>
+  
+  <div class='container'>
+    <h1 class="card" style="text-align:center">SIR Graph Modelling</h1>
+    <svg></svg>
+
+
+
+    <br>
+  <label for="beta-graph" >Beta: <span id=beta-val-graph class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span> </label>
+  <div class="slidecontainer">
+    <input type="range" min="0" max=".9" value=".5" class="custom-range" id="beta-graph" step=.02>
+  </div>
+  <label for="mu-graph" >mu : <span id=mu-val-graph class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span></label>
+  <div class="slidecontainer">
+    <input type="range" min="0.1" max=".7" value=".2" class="custom-range" id="mu-graph" step=.02>
+  </div>
+  <label for="nodes" >No. of Nodes<span id=node-val class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span></label>
+  <div class="slidecontainer">
+    <input type="range" min="2" max="100" value="15" class="custom-range" id="nodes" step=1>
+  </div>
+
+
+    <button id='run2' class="btn btn-success">Run</button> 
+    <button id='stop2' class="btn btn-danger">Stop</button> 
+  </div>
+  
+
+
+  </div>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <link href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Oxygen:300' rel='stylesheet' type='text/css'>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+  
+</body>
+</html>
