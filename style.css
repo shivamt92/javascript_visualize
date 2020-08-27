@@ -3,3 +3,9 @@
     align-items: center;
     align-self: center;
 }
+
+circle {
+    
+    stroke: #0F1C3F;
+    stroke-width: 0.1875em;
+  }
