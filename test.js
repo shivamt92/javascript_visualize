@@ -1,4 +1,4 @@
-
+import {OnClick, random_graphs, startVisualize} from "./network_graph.js"
 
 var EventListner = {
     addListner_btn: function(id,type,func){
@@ -26,7 +26,7 @@ var SIR_Model = {
     let mu = Number(document.getElementById("mu").value)
     let p_i = Number(document.getElementById("infected").value)
     
-    SIR_Model.SIR(beta=beta,mu=mu,rho_i=p_i)
+    SIR_Model.SIR(beta=beta,mu=mu,p_i)
     // console.log('here')
     
 
@@ -48,17 +48,17 @@ var SIR_Model = {
 
         // console.log("removed Event listner")
 
-        let rho_S = 1 -rho_i - rho_r
-        let rho_I = rho_i
+        var rho_S = 1 -rho_i - rho_r
+        var rho_I = rho_i
     
 
         function getNext(){
             
             let rho_I_temp = rho_I
             let rho_S_temp = rho_S
-            rho_I += beta*rho_I_temp*rho_S_temp - mu*rho_I_temp
-            rho_S -= beta*rho_I_temp*rho_S_temp
-            rho_R  = 1 - rho_I - rho_S
+            rho_I = rho_I+ beta*rho_I_temp*rho_S_temp - mu*rho_I_temp
+            rho_S = rho_S- beta*rho_I_temp*rho_S_temp
+            let rho_R  = 1 - rho_I - rho_S
             
             return rho_I
         
@@ -129,15 +129,15 @@ window.onload = function(){
 
     console.log(SIR_Model)
 
-    this.EventListner.addListner_btn('run','click',SIR_Model.run_SIR)
+    EventListner.addListner_btn('run','click',SIR_Model.run_SIR)
 
 
     // document.getElementById("run").addEventListener('click', SIR_Model.run_SIR)
 
 
 
-    slider_ids = ["beta", "mu", "infected"]
-    slider_vals = ["beta-val", "mu-val","infec-val"]
+    const slider_ids = ["beta", "mu", "infected","beta-graph", "mu-graph", "nodes"]
+    const slider_vals = ["beta-val", "mu-val","infec-val", "beta-val-graph", "mu-val-graph","node-val"]
 
     for (let i=0; i<slider_ids.length; i++){
 
@@ -151,8 +151,7 @@ window.onload = function(){
 
     EventListner.addListner_btn("run2","click",OnClick)
     EventListner.addListner_btn("stop2","click",this.bind_btn)
-    slider_ids = ["beta-graph", "mu-graph", "nodes"]
-    slider_vals = ["beta-val-graph", "mu-val-graph","node-val"]
+    
 
     for (let i=0; i<slider_ids.length; i++){
 
@@ -164,8 +163,11 @@ window.onload = function(){
 
 
     random_graphs.generate_erdos_renyi(10,.3)
-    this.startVisualize()
+    startVisualize()
 
 
 
 }
+
+
+export {EventListner} 

@@ -1,3 +1,5 @@
+import {EventListner} from "./test.js"
+
 var nodes = []
 var links = []
 var network = {circle:null, simulation:null}
@@ -15,7 +17,7 @@ var buttons = {
     stop: false
 }
 
-random_graphs = {
+var random_graphs = {
 
     generate_erdos_renyi : function (size, probs){
         nodes = []
@@ -61,9 +63,9 @@ function OnClick(){
     EventListner.addListner_btn("stop2","click",bind_btn)
 
     
-    beta = Number(document.getElementById("beta-graph").value)
-    mu = Number(document.getElementById("mu-graph").value)
-    nr_nodes = Number(document.getElementById("nodes").value)
+    let beta = Number(document.getElementById("beta-graph").value)
+    let mu = Number(document.getElementById("mu-graph").value)
+    let nr_nodes = Number(document.getElementById("nodes").value)
     console.log(nr_nodes,beta,mu)
     random_graphs.generate_erdos_renyi(nr_nodes,.2)
     startVisualize()
@@ -72,7 +74,7 @@ function OnClick(){
     sirData.mu = mu
 
 
-    index = Math.floor(Math.random()*nr_nodes)
+    let index = Math.floor(Math.random()*nr_nodes)
     nodes[index].state = "i"
     sirData.nrinfected = sirData.nrinfected + 1;
     sirData.nrsuspected = sirData.nrsuspected -1;
@@ -88,8 +90,8 @@ function init_graph_SIR(){
     
     // Infections
     for (let i=0; i<links.length; i++){
-        s = links[i].source
-        t = links[i].target
+        let s = links[i].source
+        let t = links[i].target
         if (s.state==="i" && t.state==="s" || t.state==="i" && s.state==="s"){
             
             if (Math.random()<sirData.beta){
@@ -139,8 +141,8 @@ function startVisualize(){
 
     document.getElementById("graph").textContent = ''
 
-    width = 600
-    height = 500
+    let width = 600
+    let height = 500
     const svg = d3.select('#graph')
         .attr("width",width)
         .attr("height",height)
@@ -159,12 +161,28 @@ function startVisualize(){
     .attr("cy", height/2)
     .attr("fill","blue")
     .attr("draggable","true")
+    .on("mouseover", mouseoverHandler)
     .call(d3.drag()
         .on("start", dragstart)
         .on("drag", dragging)
         .on("end", draggend))
+    
+    group.append("text")
+    
 
-   
+
+    function mouseoverHandler(d,i){
+        console.log("ssse",this)
+        console.log(d3.select("g").select('text'))
+        d3.select("g").select('text')
+        .text("hello")
+        // .attr("text",(d)=>{if (d.state == 'i') return "Infected"
+        //                     if (d.state == 's') return "Susceptible"
+        //                     else return "Recovered"            
+    // })
+
+    }
+
     function dragstart(d,i){
         if (!d3.event.active) network.simulation.alphaTarget(0.3).restart()
         
@@ -227,39 +245,8 @@ function startVisualize(){
         })
         
 
-    
-
 }
 
-
-
-
-// drag = simulation => {
-  
-//     function dragstarted(d) {
-//       if (!d3.event.active){
-//           console.log(simulation)
-//            simulation.alphaTarget(1).restart();}
-//       d.fx = d.x;
-//       d.fy = d.y;
-//     }
-    
-//     function dragged(d) {
-//       d.fx = d3.event.x;
-//       d.fy = d3.event.y;
-//     }
-    
-//     function dragended(d) {
-//       if (!d3.event.active) simulation.alphaTarget(0);
-//       d.fx = null;
-//       d.fy = null;
-//     }
-    
-//     return d3.drag()
-//         .on("start", dragstarted)
-//         .on("drag", dragged)
-//         .on("end", dragended);
-// }
 
 
 function refreshVisualize(){
@@ -274,3 +261,4 @@ function refreshVisualize(){
 
 
   
+export {startVisualize,OnClick, random_graphs}
