@@ -1,5 +1,6 @@
 import {startVisualize, random_graphs, nodes, links, network} from "./../network_graph.js"
 
+var click = false 
 
 function create2DArray(m,n){
     var array = []
@@ -11,9 +12,9 @@ function create2DArray(m,n){
 
 function createLMatrix(nodes,links){
 
-    console.log(nodes,links)
+    // console.log(nodes,links)
     var matrix = create2DArray(nodes.length, nodes.length)
-    console.log(matrix)
+    // console.log(matrix)
     for (let i=0; i<links.length; i++){
 
         let s_index = +links[i].source
@@ -153,9 +154,11 @@ function visualize_Community(eigens){
             network.circle
                 .attr("cx", d => d.x)
                 .attr("cy", d => d.y)
-                .attr("fill",(d,i)=>{
+                .attr("fill",(d,i)=>{  if (click = true){
                     if (eigens.vectors[1][i]<0) return "red"
                     else return "green"
+                    click = false
+                }
                 })
         })
         
@@ -173,9 +176,19 @@ function visualize_Community(eigens){
 // }
 
 window.onload = function(){
-
-    random_graphs.generate_erdos_renyi(15,.3)
-    const eigens = Clustering(nodes,links)
+    this.document.getElementById("nodes").oninput = function(){
+        document.getElementById("node-val").innerText = document.getElementById("nodes").value
+    }
+    document.getElementById("run2").addEventListener("click",()=>{
+        let val = document.getElementById("nodes").value
+        random_graphs.generate_erdos_renyi(val,.5)
+        let eigens = Clustering(nodes,links)
+        console.log(eigens)
+        visualize_Community(eigens)
+        click = true 
+        network.simulation.restart()})
+    random_graphs.generate_erdos_renyi(8,.5)
+    let eigens = Clustering(nodes,links)
     visualize_Community(eigens)
     
 

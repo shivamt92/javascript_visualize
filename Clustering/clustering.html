@@ -18,15 +18,17 @@
     
     
         <br>
+      <div style="padding-right: 90px; padding-left: 90px;">
+        <label for="nodes" >No. of Nodes<span id=node-val class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span></label>
+        <div class="slidecontainer" >
+          <input type="range" min="5" max="10" value="6" class="custom-range" id="nodes" step=1>
+        </div>
       
-      <label for="nodes" >No. of Nodes<span id=node-val class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span></label>
-      <div class="slidecontainer">
-        <input type="range" min="2" max="100" value="15" class="custom-range" id="nodes" step=1>
-      </div>
+      
     
     
-        <button id='run2'  class="btn btn-success">Community Detection</button> 
-        <button id='stop2' class="btn btn-danger">Stop</button> 
+        <button style="margin: auto;width: 100%;" id='run2'  class="btn btn-success">Community Detection</button> 
+        </div>
       </div>
 
 
