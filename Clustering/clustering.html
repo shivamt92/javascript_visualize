@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="./../style.css" >
   <!-- <script src="./SIR.js"></script> -->
-  <script src="./clustering.js"></script>
+  <script type="module"src="./clustering.js"></script>
   <script type="module" src="./../network_graph.js"></script>
   <script src="https://pagecdn.io/lib/mathjs/7.1.0/math.min.js" crossorigin="anonymous"  ></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -18,14 +18,7 @@
     
     
         <br>
-      <label for="beta-graph" >Beta: <span id=beta-val-graph class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span> </label>
-      <div class="slidecontainer">
-        <input type="range" min="0" max=".9" value=".5" class="custom-range" id="beta-graph" step=.02>
-      </div>
-      <label for="mu-graph" >mu : <span id=mu-val-graph class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span></label>
-      <div class="slidecontainer">
-        <input type="range" min="0.1" max=".7" value=".2" class="custom-range" id="mu-graph" step=.02>
-      </div>
+      
       <label for="nodes" >No. of Nodes<span id=node-val class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span></label>
       <div class="slidecontainer">
         <input type="range" min="2" max="100" value="15" class="custom-range" id="nodes" step=1>

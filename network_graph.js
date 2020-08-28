@@ -172,8 +172,8 @@ function startVisualize(){
 
 
     function mouseoverHandler(d,i){
-        console.log("ssse",this)
-        console.log(d3.select("g").select('text'))
+        // console.log("ssse",this)
+        // console.log(d3.select("g").select('text'))
         d3.select("g").select('text')
         .text("hello")
         // .attr("text",(d)=>{if (d.state == 'i') return "Infected"
@@ -261,4 +261,4 @@ function refreshVisualize(){
 
 
   
-export {startVisualize,OnClick, random_graphs}
+export {startVisualize,OnClick, random_graphs, nodes, links, network}
