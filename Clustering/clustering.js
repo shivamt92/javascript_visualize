@@ -14,7 +14,7 @@ function createLMatrix(nodes,links){
 
     // console.log(nodes,links)
     var matrix = create2DArray(nodes.length, nodes.length)
-    // console.log(matrix)
+    console.log(matrix)
     for (let i=0; i<links.length; i++){
 
         let s_index = +links[i].source
@@ -44,7 +44,7 @@ function createLMatrix(nodes,links){
             
         }
     }
-
+    console.log(laplace)
     return laplace
     
 }
@@ -59,7 +59,7 @@ function visualize_Community(eigens){
     document.getElementById("graph").textContent = ''
 
     let width = 600
-    let height = 500
+    let height = 400
     const svg = d3.select('#graph')
         .attr("width",width)
         .attr("height",height)
@@ -140,7 +140,7 @@ function visualize_Community(eigens){
 
     network.simulation = d3.forceSimulation(nodes)
         .force("center",d3.forceCenter(width/2,height/2))
-        .force("link",d3.forceLink(links).distance(10*nodes.length))
+        .force("link",d3.forceLink(links).distance(20*nodes.length))
         .force("charge",d3.forceManyBody().strength(-40))
         .force("collide", d3.forceCollide(20))
         .on("tick", (d)=>{
@@ -164,30 +164,24 @@ function visualize_Community(eigens){
         
 
 }
-// function displayCommunity(eigens){
-//     console.log("Trying to display")
-    
-
-//     d3.selectAll("circle")
-//     .attr("fill", (d,i)=>{
-//         // console.log(d,i)
-//         if (eigens.vectors[2][i]>0) return "red"
-//                         else return "green"})
-// }
 
 window.onload = function(){
     this.document.getElementById("nodes").oninput = function(){
         document.getElementById("node-val").innerText = document.getElementById("nodes").value
     }
+    this.document.getElementById("prob").oninput = function(){
+        document.getElementById("prob-val").innerText = document.getElementById("prob").value
+    }
     document.getElementById("run2").addEventListener("click",()=>{
-        let val = document.getElementById("nodes").value
-        random_graphs.generate_erdos_renyi(val,.5)
+        let val = +document.getElementById("nodes").value
+        let prob = +document.getElementById("prob").value
+        random_graphs.generate_erdos_renyi(val,prob)
         let eigens = Clustering(nodes,links)
         console.log(eigens)
         visualize_Community(eigens)
         click = true 
         network.simulation.restart()})
-    random_graphs.generate_erdos_renyi(8,.5)
+    random_graphs.generate_erdos_renyi(6,1)
     let eigens = Clustering(nodes,links)
     visualize_Community(eigens)
     
